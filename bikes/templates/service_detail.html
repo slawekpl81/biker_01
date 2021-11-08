@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <h3>Service</h3>
+        <p>{{ object.id }}</p>
+        <p>{{ object.client }}</p>
+        <p>{{ object.bike }}</p>
+        <p>{{ object.start }}</p>
+        <p>{{ object.end }}</p>
+        <p>{{ object.price }}</p>
+        <p>{{ object.description }}</p>
+    </div>
+{% endblock %}

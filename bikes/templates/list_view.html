@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul>
+        {% if clients_list %}
+            <h2>Clients List</h2>
+            {% for item in clients_list %}
+                <li><a href={% url 'bikes:client_detail' item.id %}>{{ item }}</a></li>
+            {% endfor %}
+            </ul>
+        {% elif bikes_list %}
+            <h2>Bikes List</h2>
+            <ul>
+                {% for item in bikes_list %}
+                    <li><a href={% url 'bikes:bike_detail' item.id %}>{{ item }}</a></li>
+                {% endfor %}
+            </ul>
+        {% elif services_list %}
+            <h2>Services List</h2>
+            <ul>
+                {% for item in services_list %}
+                    <li><a href={% url 'bikes:service_detail' item.id %}>{{ item }}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+{% endblock %}
