@@ -21,5 +21,5 @@ urlpatterns = [
     # users app
     path('users/', include('users.urls', namespace='users')),
     # bikes app
-    path('bikes/', include('bikes.urls', namespace='bikes')),
+    path('', include('bikes.urls', namespace='bikes')),
 ]

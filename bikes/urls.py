@@ -1,8 +1,9 @@
 from django.urls import path
+from bikes import views
 
 app_name= 'bikes'
 
 urlpatterns = [
-    # path('admin/', admin.site.urls),
+    path('', views.start, name='start'),
 
 ]
