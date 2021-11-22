@@ -1,26 +1,76 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <ul>
-        {% if clients_list %}
-            <h2>Clients List</h2>
-            {% for item in clients_list %}
-                <li><a href={% url 'bikes:client_detail' item.id %}>{{ item }}</a></li>
+
+    {% if clients_list %}
+        <h2>Clients List</h2>
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">name</th>
+                <th scope="col">email</th>
+                <th scope="col">phone</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for client in clients_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <th><a href={% url 'bikes:client_detail' client.id %}>{{ client.name }}</a></th>
+                    <th>{{ client.email }}</th>
+                    <th>{{ client.phone }}</th>
+                </tr>
             {% endfor %}
-            </ul>
-        {% elif bikes_list %}
-            <h2>Bikes List</h2>
-            <ul>
-                {% for item in bikes_list %}
-                    <li><a href={% url 'bikes:bike_detail' item.id %}>{{ item }}</a></li>
-                {% endfor %}
-            </ul>
-        {% elif services_list %}
-            <h2>Services List</h2>
-            <ul>
-                {% for item in services_list %}
-                    <li><a href={% url 'bikes:service_detail' item.id %}>{{ item }}</a></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
+            </tbody>
+        </table>
+    {% elif bikes_list %}
+        <h2>Bikes List</h2>
+        <table class="table table-dark table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">owner</th>
+                <th scope="col">mark</th>
+                <th scope="col">model</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for bike in bikes_list %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <th>{{ bike.owner }}</th>
+                    <th><a href={% url 'bikes:bike_detail' bike.id %}>{{ bike.mark }}</a></th>
+                    <th>{{ bike.model }}</th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% elif services_list %}
+        <h2>Services List</h2>
+        <table class="table table-dark table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">client</th>
+            <th scope="col">bike</th>
+            <th scope="col">start</th>
+            <th scope="col">end</th>
+            <th scope="col">price</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for service in services_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <th><a href={% url 'bikes:service_detail' service.id %}>{{ service.client }}</a></th>
+                <th>{{ service.bike }}</th>
+                <th>{{ service.start }}</th>
+                <th>{{ service.end }}</th>
+                <th>{{ service.price }}</th>
+            </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
 {% endblock %}
