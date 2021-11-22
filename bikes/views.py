@@ -13,6 +13,12 @@ class ClientsListView(ListView):
     template_name = 'list_view.html'
     context_object_name = 'clients_list'
 
+    def get_context_data(self, **kwargs):
+        login_user = self.request.user
+        business = login_user.employee_of.business
+        business_clients = Client.objects.filter(business=business)
+        return {'clients_list': business_clients}
+
 
 class ClientDetailView(DetailView):
     model = Client
@@ -24,6 +30,13 @@ class BikesListView(ListView):
     template_name = 'list_view.html'
     context_object_name = 'bikes_list'
 
+    def get_context_data(self):
+        login_user = self.request.user
+        business = login_user.employee_of.business
+        business_clients = Client.objects.filter(business=business)
+        business_bikes = Bike.objects.filter(owner__business__client__in=business_clients).distinct()
+        return {'bikes_list': business_bikes}
+
 
 class BikeDetailView(DetailView):
     model = Bike
@@ -34,6 +47,13 @@ class ServicesListView(ListView):
     model = Service
     template_name = 'list_view.html'
     context_object_name = 'services_list'
+
+    def get_context_data(self, **kwargs):
+        login_user = self.request.user
+        business = login_user.employee_of.business
+        business_clients = Client.objects.filter(business=business)
+        services_list = Service.objects.filter(client__business__client__in=business_clients).distinct()
+        return {'services_list': services_list}
 
 
 class ServiceDetailView(DetailView):

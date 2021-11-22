@@ -11,8 +11,8 @@ class Business(models.Model):
 
 
 class BusinessEmployee(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    business = models.ForeignKey(Business, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='employee_of')
+    business = models.OneToOneField(Business, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} - {self.business}'

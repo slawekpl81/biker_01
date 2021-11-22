@@ -12,7 +12,7 @@ class Client(models.Model):
     description = models.TextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} - {self.business}'
 
 
 class Bike(models.Model):
@@ -20,7 +20,7 @@ class Bike(models.Model):
     owner = models.ForeignKey(Client, on_delete=models.CASCADE)
     mark = models.CharField(max_length=250)
     model = models.CharField(max_length=250, blank=True)
-    year = models.IntegerField(null=True, blank=True)
+    year = models.IntegerField(blank=True)
     description = models.TextField(blank=True)
 
     def __str__(self):
@@ -32,8 +32,8 @@ class Service(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     bike = models.ForeignKey(Bike, on_delete=models.CASCADE)
     start = models.DateField(auto_now_add=True)
-    end = models.DateField(blank=True, null=True)
-    price = models.FloatField(blank=True, null=True)
+    end = models.DateField(blank=True)
+    price = models.FloatField(blank=True)
     description = models.TextField(blank=True)
 
     def __str__(self):

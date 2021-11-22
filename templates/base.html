@@ -40,14 +40,21 @@
                         <li class="nav-item">
                             <a class="nav-link active" href={% url 'users:logout' %}>Logout</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link">Business: {{ user.employee_of.business }}</a>
+                            {#                            <a class="nav-link active" href={% url 'users:logout' %}>Logout</a>#}
+                        </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link active" href={% url 'users:login' %}>Login</a>
                         </li>
                     {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link active" href={% url 'admin:login' %}>Admin</a>
-                    </li>
+                    {% if user.is_staff %}
+                        <li class="nav-item">
+                            <a class="nav-link active" href={% url 'admin:login' %}>Admin</a>
+                        </li>
+                    {% endif %}
+
                 </ul>
             </div>
         </div>
