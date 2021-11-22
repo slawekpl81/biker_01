@@ -2,12 +2,20 @@
 
 {% block content %}
     <div class="container">
-        <h3>Bike</h3>
-        <p>{{ object.id }}</p>
-        <p>{{ object.owner }}</p>
-        <p>{{ object.mark }}</p>
-        <p>{{ object.model }}</p>
-        <p>{{ object.year }}</p>
-        <p>{{ object.description }}</p>
+        <div class="card m-1 shadow">
+            <div class="card-header">
+                {{ object.mark }}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">model: {{ object.model }}</li>
+                <li class="list-group-item">year: {{ object.year }}</li>
+                <li class="list-group-item">owner:
+                    <a href="{% url 'bikes:client_detail' object.owner.id %}">{{ object.owner }}</a>
+                </li>
+                <li class="list-group-item">description: <p>
+                    {{ object.description }}
+                </p></li>
+            </ul>
+        </div>
     </div>
 {% endblock %}

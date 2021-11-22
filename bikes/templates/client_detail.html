@@ -2,13 +2,54 @@
 
 {% block content %}
     <div class="container">
-        <h3>Client</h3>
-        <p>{{ object.id }}</p>
-        <p>{{ object.name }}</p>
-        <p>{{ object.business }}</p>
-        <p>{{ object.email }}</p>
-        <p>{{ object.phone }}</p>
-        <p>{{ object.description }}</p>
+        <div class="card m-1 shadow">
+            <div class="card-header">
+                {{ client.name }}
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">email: {{ client.email }}</li>
+                <li class="list-group-item">phone: {{ client.phone }}</li>
+                <li class="list-group-item">description: <p>
+                    {{ client.description }}
+                </p></li>
+            </ul>
+        </div>
+        <div class="row">
+        <p>bikes:</p>
+            {% for bike in bikes %}
+                <div class="col col-3">
+                    <div class="card m-1 shadow">
+                        <div class="card-header">
+                            <a href="{%  url 'bikes:bike_detail' bike.id %}">{{ bike.mark }}</a>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ bike.model }}</li>
+                            <li class="list-group-item">{{ bike.year }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% empty %}
+            {% endfor %}
+        </div>
+        <div class="row">
+        <p>services:</p>
+            {% for service in services %}
+                <div class="col col-3">
+                    <div class="card m-1 shadow">
+                        <div class="card-header">
+                            <a href="{% url 'bikes:service_detail' service.id %}">{{ service.bike }}</a>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ service.start }}-{{ service.end }}</li>
+                            <li class="list-group-item">{{ service.price }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% empty %}
+            {% endfor %}
+
+        </div>
+
     </div>
 {% endblock %}
 

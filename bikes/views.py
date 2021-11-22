@@ -25,6 +25,13 @@ class ClientDetailView(DetailView):
     template_name = 'client_detail.html'
 
 
+def client_extra_view(request, pk):
+    client = Client.objects.get(pk=pk)
+    bikes = Bike.objects.filter(owner=client)
+    services = Service.objects.filter(client=client)
+    return render(request, 'client_detail.html', {'client': client, 'bikes': bikes, 'services': services})
+
+
 class BikesListView(ListView):
     model = Bike
     template_name = 'list_view.html'
