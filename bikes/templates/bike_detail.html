@@ -4,18 +4,45 @@
     <div class="container">
         <div class="card m-1 shadow">
             <div class="card-header">
-                {{ object.mark }}
+                {{ bike.mark }}
+                <a href="{% url 'bikes:update_bike' bike.id %}">
+                    <button class="btn btn-info">edit</button>
+                </a>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">model: {{ object.model }}</li>
-                <li class="list-group-item">year: {{ object.year }}</li>
+                <li class="list-group-item">model: {{ bike.model }}</li>
+                <li class="list-group-item">year: {{ bike.year }}</li>
                 <li class="list-group-item">owner:
-                    <a href="{% url 'bikes:client_detail' object.owner.id %}">{{ object.owner }}</a>
+                    <a href="{% url 'bikes:client_detail' bike.owner.id %}">{{ bike.owner }}</a>
                 </li>
                 <li class="list-group-item">description: <p>
-                    {{ object.description }}
+                    {{ bike.description }}
                 </p></li>
             </ul>
         </div>
+        <div class="row">
+            <p>services:</p>
+            <a href="{% url 'bikes:add_service' bike.id %}">
+                <button class="btn btn-success">
+                    add service
+                </button>
+            </a>
+            {% for service in services %}
+                <div class="col col-3">
+                    <div class="card m-1 shadow">
+                        <div class="card-header">
+                            <a href="{% url 'bikes:service_detail' service.id %}">{{ service.bike }}</a>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">{{ service.start }}-{{ service.end }}</li>
+                            <li class="list-group-item">{{ service.price }}</li>
+                        </ul>
+                    </div>
+                </div>
+            {% empty %}
+            {% endfor %}
+
+        </div>
+
     </div>
 {% endblock %}

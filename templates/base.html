@@ -22,7 +22,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href={% url 'bikes:clients' %}>all clients</a></li>
-                            <li><a class="dropdown-item" href="#">add client</a></li>
+                            <li><a class="dropdown-item" href={% url 'bikes:add_client' %}>add client</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -32,7 +32,6 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href={% url 'bikes:bikes' %}>all bikes</a></li>
-                            <li><a class="dropdown-item" href="#">add bike</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -42,7 +41,6 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href={% url 'bikes:services' %}>all services</a></li>
-                            <li><a class="dropdown-item" href="#">add service</a></li>
                         </ul>
                     </li>
                     {% if user.is_authenticated %}

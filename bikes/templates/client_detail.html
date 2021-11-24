@@ -5,6 +5,9 @@
         <div class="card m-1 shadow">
             <div class="card-header">
                 {{ client.name }}
+                <a href="{% url 'bikes:update_client' client.id %}">
+                    <button class="btn btn-info">edit</button>
+                </a>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">email: {{ client.email }}</li>
@@ -15,12 +18,17 @@
             </ul>
         </div>
         <div class="row">
-        <p>bikes:</p>
+            <p>bikes:</p>
+            <a href="{% url 'bikes:add_bike' client.id %}">
+                <button class="btn btn-warning">
+                    add bike
+                </button>
+            </a>
             {% for bike in bikes %}
                 <div class="col col-3">
                     <div class="card m-1 shadow">
                         <div class="card-header">
-                            <a href="{%  url 'bikes:bike_detail' bike.id %}">{{ bike.mark }}</a>
+                            <a href="{% url 'bikes:bike_detail' bike.id %}">{{ bike.mark }}</a>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">{{ bike.model }}</li>
@@ -32,7 +40,7 @@
             {% endfor %}
         </div>
         <div class="row">
-        <p>services:</p>
+            <p>services:</p>
             {% for service in services %}
                 <div class="col col-3">
                     <div class="card m-1 shadow">

@@ -15,6 +15,11 @@
                 <li class="list-group-item">description: <p>
                     {{ object.description }}
                 </p></li>
+                <li class="list-group-item">
+                    <a href="{% url 'bikes:update_service' object.id %}">
+                        <button class="btn btn-info">edit</button>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
